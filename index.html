@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doc On Demand</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            padding: 20px;
+            max-width: 600px;
+            margin: auto;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        .btn {
+            background-color: #255487;
+            color: rgb(240, 240, 240);
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #1e436b;
+        }
+        .search-bar {
+            margin-bottom: 20px;
+        }
+        .button-list button {
+            margin: 5px;
+            padding: 10px 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="main-page">
+        <h1>Take an appointment</h1>
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" placeholder="Enter your name">
+        </div>
+        <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="text" id="phone" placeholder="Enter your phone number">
+        </div>
+        <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" placeholder="Enter your email">
+        </div>
+        <button class="btn" onclick="showHospitalsPage()">Submit</button>
+    </div>
+
+    <div class="container" id="hospitals-page" style="display: none;">
+        <h1>Details of Available Hospitals</h1>
+        <input type="text" class="search-bar" id="hospital-search" placeholder="Search hospitals" onkeyup="filterHospitals()">
+        <div class="button-list">
+            <button onclick="showHospitalDetails('elite')">Elite Mission Hospital</button>
+            <button onclick="showHospitalDetails('metro')">Metropolitan</button>
+            <button onclick="showHospitalDetails('sun')">Sun Medicals</button>
+            <button onclick="showHospitalDetails('jubilee')">Jubilee Mission</button>
+            <button onclick="showHospitalDetails('college')">Medical College</button>
+        </div>
+    </div>
+
+    <div class="container" id="hospital-details" style="display: none;">
+        <h1 id="hospital-title"></h1>
+        <div class="button-list">
+            <button onclick="showFacilityPage('consultation')">Consultation</button>
+            <button onclick="showFacilityPage('lab')">Lab Facilities</button>
+            <button onclick="showFacilityPage('scanning')">Scanning Facilities</button>
+        </div>
+    </div>
+
+    <div class="container" id="facility-page" style="display: none;">
+        <h1 id="facility-title"></h1>
+        <input type="text" class="search-bar" id="facility-search" placeholder="Search facilities" onkeyup="filterFacilities()">
+        <div class="button-list" id="facility-buttons"></div>
+    </div>
+
+    <div class="container" id="booking-page" style="display: none;">
+        <h1>Booking Details</h1>
+        <div class="button-list">
+            <button id="time-slot">Time</button>
+            <button onclick="confirmBooking()">Book</button>
+        </div>
+    </div>
+
+    <script>
+        function showHospitalsPage() {
+            document.getElementById('main-page').style.display = 'none';
+            document.getElementById('hospitals-page').style.display = 'block';
+        }
+
+        function showHospitalDetails(hospital) {
+            const titles = {
+                elite: 'Elite Mission Hospital',
+                metro: 'Metropolitan',
+                sun: 'Sun Medicals',
+                jubilee: 'Jubilee Mission',
+                college: 'Medical College'
+            };
+            document.getElementById('hospitals-page').style.display = 'none';
+            document.getElementById('hospital-details').style.display = 'block';
+            document.getElementById('hospital-title').innerText = titles[hospital];
+        }
+
+        // function showFacilityPage(facility) {
+        //     const facilities = {
+        //         consultation: ['Dr. Nayana Pradeep', 'Dr. Vandana', 'Dr. Remesh', 'Dr. Arun Mohan', 'Dr. Ravi', 'Dr. Araya Alex', 'Dr. Haridas'],
+        //         lab: ['BMP', 'CMP', 'TSH', 'CBC', 'UA'],
+        //         scanning: ['CT', 'MRI', 'ECG', 'X-RAY', 'PET']
+        //     };
+
+        //     document.getElementById('hospital-details').style.display = 'none';
+        //     document.getElementById('facility-page').style.display = 'block';
+        //     document.getElementById('facility-title').innerText = facility.charAt(0).toUpperCase() + facility.slice(1) + ' Facilities';
+        //     const buttonList = document.getElementById('facility-buttons');
+        //     buttonList.innerHTML = '';
+
+        //     facilities[facility].forEach(item => {
+        //         const button = document.createElement('button');
+        //         button.innerText = item;
+        //         button.onclick = function() {
+        //             if (facility === 'consultation') {
+        //                 handleDoctorSelection(item);
+        //             } else {
+        //                 handleFacilitySelection(item);
+        //             }
+        //         };
+        //         buttonList.appendChild(button);
+        //     });
+        // }
+        function showFacilityPage(facilityType) {
+            fetch(`http://localhost:3000/facilities/${facilityType}`)
+                .then(response => {
+                    if (!response.ok) throw new Error('Facility type not found');
+                    return response.json();
+                })
+                .then(data => {
+                    document.getElementById('hospital-details').style.display = 'none';
+                    document.getElementById('facility-page').style.display = 'block';
+                    document.getElementById('facility-title').innerText = facilityType.charAt(0).toUpperCase() + facilityType.slice(1) + ' Facilities';
+
+                    const buttonList = document.getElementById('facility-buttons');
+                    buttonList.innerHTML = '';
+
+                    data.forEach(item => {
+                        const button = document.createElement('button');
+                        button.innerText = item;
+                        button.onclick = () => handleFacilitySelection(item);
+                        buttonList.appendChild(button);
+                    });
+                })
+                .catch(error => console.error('Error fetching facilities:', error));
+        }
+
+
+        function handleDoctorSelection(doctor) {
+            const morningDoctors = ['Dr. Nayana Pradeep', 'Dr. Vandana', 'Dr. Remesh'];
+            const afternoonDoctors = ['Dr. Arun Mohan', 'Dr. Ravi', 'Dr. Araya Alex', 'Dr. Haridas'];
+
+            document.getElementById('facility-page').style.display = 'none';
+            document.getElementById('booking-page').style.display = 'block';
+
+            const timeSlot = document.getElementById('time-slot');
+            if (morningDoctors.includes(doctor)) {
+                timeSlot.innerText = 'Time: 10:30 AM - 12:30 PM';
+            } else if (afternoonDoctors.includes(doctor)) {
+                timeSlot.innerText = 'Time: 2:00 PM - 4:00 PM';
+            }
+        }
+
+        function handleFacilitySelection(facility) {
+            document.getElementById('facility-page').style.display = 'none';
+            document.getElementById('booking-page').style.display = 'block';
+
+            const timeSlot = document.getElementById('time-slot');
+            timeSlot.innerText = 'Time: 10:30 AM - 12:30 PM';
+        }
+
+        // function confirmBooking() {
+        //     alert('Your booking has been confirmed!');
+        //     location.reload();
+        // }
+        function confirmBooking() {
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const email = document.getElementById('email').value;
+            const hospital = document.getElementById('hospital-title').innerText;
+            const facility = document.getElementById('facility-title').innerText;
+            const time = document.getElementById('time-slot').innerText;
+
+            const bookingData = {
+                name,
+                phone,
+                email,
+                hospital,
+                facility,
+                time
+            };
+
+            fetch('http://localhost:3000/book', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(bookingData)
+            })
+                .then(response => {
+                    if (!response.ok) throw new Error('Error submitting booking');
+                    return response.json();
+                })
+                .then(data => {
+                    alert('Your booking has been confirmed!');
+                    console.log('Booking details:', data);
+                    location.reload();
+                })
+                .catch(error => {
+                    console.error('Error confirming booking:', error);
+                    alert('Failed to confirm booking. Please try again.');
+                });
+        }
+
+
+        function filterHospitals() {
+            const query = document.getElementById('hospital-search').value.toLowerCase();
+            const buttons = document.querySelectorAll('#hospitals-page .button-list button');
+            buttons.forEach(button => {
+                button.style.display = button.innerText.toLowerCase().includes(query) ? 'block' : 'none';
+            });
+        }
+
+        function filterFacilities() {
+            const query = document.getElementById('facility-search').value.toLowerCase();
+            const buttons = document.querySelectorAll('#facility-buttons button');
+            buttons.forEach(button => {
+                button.style.display = button.innerText.toLowerCase().includes(query) ? 'block' : 'none';
+            });
+        }
+        // function fetchHospitals() {
+        //     fetch('http://localhost:3000/hospitals')
+        //         .then(response => response.json())
+        //         .then(data => {
+        //             const buttonList = document.querySelector('.button-list');
+        //             buttonList.innerHTML = ''; // Clear any existing buttons
+        //             data.forEach(hospital => {
+        //                 const button = document.createElement('button');
+        //                 button.innerText = hospital.name;
+        //                 button.onclick = () => showHospitalDetails(hospital.id);
+        //                 buttonList.appendChild(button);
+        //             });
+        //         })
+        //         .catch(error => console.error('Error fetching hospitals:', error));
+        // }
+        function fetchHospitals() {
+            fetch('http://localhost:3000/hospitals')
+                .then(response => response.json())
+                .then(data => {
+                    const buttonList = document.querySelector('.button-list');
+                    buttonList.innerHTML = ''; // Clear any existing buttons
+                    data.forEach(hospital => {
+                        const button = document.createElement('button');
+                        button.innerText = hospital.name;
+                        button.onclick = () => showHospitalDetails(hospital.id);
+                        buttonList.appendChild(button);
+                    });
+                })
+                .catch(error => console.error('Error fetching hospitals:', error));
+        }
+
+        // Call fetchHospitals when the hospital page is loaded
+        document.getElementById('main-page').querySelector('.btn').addEventListener('click', () => {
+            fetchHospitals();
+            showHospitalsPage();
+        });
+
+
+        // Call fetchHospitals when the hospital page is loaded
+        document.getElementById('main-page').querySelector('.btn').addEventListener('click', () => {
+            fetchHospitals();
+            showHospitalsPage();
+        });
+
+    </script>
+</body>
+</html>
