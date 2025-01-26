@@ -2,7 +2,7 @@
 
 
 ## Basic Details
-### Team Name: The Coding Co.
+### Team Name:  The Coding Co.
 
 
 ### Team Members
