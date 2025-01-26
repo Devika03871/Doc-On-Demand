@@ -147,9 +147,6 @@ For Software:
 ![Team](Add photo of your team here)
 
 
-![Components](Add photo of your components here)
-*List out all components shown*
-
 ![Build](Add photos of build process here)
 *Explain the build steps*
 
