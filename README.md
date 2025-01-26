@@ -126,14 +126,20 @@ npm start
 For Software:
 
 # Screenshots (Add at least 3)
-![Screenshot1](Add screenshot 1 here with proper name)
-*Add caption explaining what this shows*
+![Screenshot (1)](https://github.com/user-attachments/assets/105883a8-cb40-4cc6-a56e-11dda30ee47e)
+
 
 ![Screenshot2](Add screenshot 2 here with proper name)
-*Add caption explaining what this shows*
+![Screenshot (2)](https://github.com/user-attachments/assets/ab468d59-432d-4fe8-b325-96ed1b7875f1)
 
-![Screenshot3](Add screenshot 3 here with proper name)
-*Add caption explaining what this shows*
+
+![Screenshot3](Add screenshot 3 here with proper NAME)
+![Screenshot (3)](https://github.com/user-attachments/assets/1ee2412d-6b2e-4745-ab51-1973ff3529b1)
+![Screenshot (4)](https://github.com/user-attachments/assets/42d40480-02d3-42f1-9ea9-34a5844a698c)
+![Screenshot (5)](https://github.com/user-attachments/assets/98244826-e85e-47d8-8c4c-3c18122e8fef)
+![Screenshot (7)](https://github.com/user-attachments/assets/572217cb-1da4-4ad2-8103-5423af173a5a)
+
+
 
 
 
@@ -152,16 +158,16 @@ For Software:
 
 ### Project Demo
 # Video
-[Add your demo video link here]
-*Explain what the video demonstrates*
+https://drive.google.com/file/d/1_dcXMPuH3Inzk2EYjd4rcNr9hi7iGpcy/view?usp=sharing
 
-# Additional Demos
-[Add any extra demo materials/links]
+
+
 
 ## Team Contributions
-- [Name 1]: [Specific contributions]
-- [Name 2]: [Specific contributions]
-- [Name 3]: [Specific contributions]
+- DEVIKA R: FRONTEND AND MAIN CODINGS
+ -DEVIKA S NAIR: LINKING FRONTEND AND BACKEND
+
+- ARDHRA K MANOJ:IDEA AND BACKEND
 
 ---
 Made with ❤️ at TinkerHub
