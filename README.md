@@ -1,31 +1,30 @@
-# [Project Name] 🎯
+# Doc On Demand 🎯
 
 
 ## Basic Details
-### Team Name: [Name]
+### Team Name: The Coding Co.
 
 
 ### Team Members
-- Member 1: [Name] - [College]
-- Member 2: [Name] - [College]
-- Member 3: [Name] - [College]
+- Member 1: DEVIKA R- VIDYA ACADEMY OF SCIENCE AND TECHNOLOGY,THRISSUR
+- Member 2: DEVIKA S NAIR - VIDYA ACADEMY OF SCIENCE AND TECHNOLOGY,THRISSUR
+- Member 3: ARDHRA K MANOJ - VIDYA ACADEMY OF SCIENCE AND TECHNOLOGY,THRISSUR
 
 ### Hosted Project Link
-[mention your project hosted project link here]
+[https://github.com/Devika03871/Doc-On-Demand]
 
 ### Project Description
-[2-3 lines about what your project does]
-
+IT IS WEBSITE WHICH MAKE USER TO  TAKE AN APPOINTMENT TO CONSULT DOCTOR OR LAB ,SCANNING FACILITIES IN EASIER WAY.
 ### The Problem statement
-[What ridiculous problem are you solving?]
+DIFFICULTIES WHILE TAKING APPOINTMENT FOR CONSULTING A DOCTOR OR TAKING SLOTS FOR LAB SCANNING FACILITIES.
 
 ### The Solution
-[How are you solving it? Keep it fun!]
+WE CREATE ALL THIS PROBLEM SOLVING IN ONE WEBSITE .IF A USER IS ENTERING TO OUR WEBSITE HE/SHE CAN TAKE AN APPOINTMENT OR BOOK A SLOT AS THEIR WISH.IT IS A USER FRIENDLY WEBSITE.WE ARE COMBING ALL THE HOSPITALS AND THIER FACILITIES IN ONE WEBSITE.SO IF A USER CAN DO BOTH OPERATION [EITHER LAB FACILITIES OR APPOINTMENT] IN ONE WEBSITE WITHOUT DIFFICULTY.
 
 ## Technical Details
 ### Technologies/Components Used
 For Software:
-- [Languages used]
+- HTML,CSS,JAVA SCRIPT
 - [Frameworks used]
 - [Libraries used]
 - [Tools used]
